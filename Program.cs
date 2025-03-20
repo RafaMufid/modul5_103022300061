@@ -24,6 +24,31 @@ class PemrosesData
         return max;
     }
 }
+class SimpleDataBase<T>
+{
+    List<T> storedData;
+    List<DateTime> inputDates;
+
+    public SimpleDataBase()
+    {
+        this.storedData = new List<T>();
+        this.inputDates = new List<DateTime>();
+    }
+
+    public void AddNewData(T data)
+    {
+        storedData.Add(data);
+        inputDates.Add(DateTime.Now);
+    }
+
+    public void PrintAllData()
+    {
+        for (int i = 0; i < storedData.Count; i++)
+        {
+            Console.WriteLine($"Data {i + 1} berisi: {storedData[i]} yang disimpan pada waktu UTC: {inputDates[i]}");
+        }
+    }
+}
 
 class Program
 {
@@ -36,5 +61,13 @@ class Program
 
         PemrosesData data = new PemrosesData();
         Console.WriteLine(data.DapatkanNilaiTerbesar(x1, x2, x3));
+
+        SimpleDataBase<float> dataBase = new SimpleDataBase<float>();
+
+        dataBase.AddNewData(10);
+        dataBase.AddNewData(30);
+        dataBase.AddNewData(22);
+
+        dataBase.PrintAllData();
     }
 }
